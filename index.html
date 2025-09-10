@@ -1,61 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>Timandra Draper | My Portfolio</title>
-<style>
-  body{
-    margin:0; font-family:'Courier New', monospace;
-    background:#0a0f1c; color:#e0e0e0;
-    display:flex; align-items:center; justify-content:center; min-height:100vh;
-  }
-  .wrap{ text-align:center }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
-  /* neon looks */
-  .neon-pink{ color:#ff2a6d; text-shadow:0 0 10px #ff2a6d, 0 0 20px #ff2a6d; }
-  .neon-orange{ color:#ff6b35; text-shadow:0 0 8px #ff6b35, 0 0 18px #ff6b35, 0 0 32px #ff6b35; }
+        <style>
+            body {
+                margin:0;
+                font-family:'Courier New', monospace;
+                background:#0a0f1c;
+                color:#e0e0e0;
+                overflow:hidden;
+            }
 
-  /* typewriter base — cursor follows text color */
-  .typewriter{
-    display:inline-block;
-    white-space:nowrap; overflow:hidden; width:0;
-    border-right:3px solid currentColor; /* caret uses the element's color */
-  }
+            body::before {
+                content:"";
+                position:fixed;
+                top:0; left:0; width:100%; height:100%;
+                background-image:
+                    linear-gradient(#00f8ff22 1px, transparent 1px),
+                    linear-gradient(90deg, #00f8ff22 1px, transparent 1px);
+                background-size: 60px 60px;
+                transform: perspective(600px) rotateX(60deg);
+                animation: moveGrid 8s linear infinite;
+                z-index:-1;
+            }
 
-  /* sizes + target widths (adjust ch if text clips) */
-  .line1{ font-size:3.2rem; --tw: 22ch; }
-  .line2{ font-size:1.6rem; --tw: 28ch; margin-top:.7rem; }
+            .after-header {
+                margin-top: 5rem;
+                width: 100%;
+                text-align: left;
+                padding-left: 2rem;
+            }
 
-  /* keyframes */
-  @keyframes typing   { from{width:0} to{width:var(--tw)} }
-  @keyframes blink    { 50%{ border-right-color:transparent } }
-  @keyframes cursorOff{ to  { border-right-color:transparent } }
-  @keyframes cursorOn { to  { border-right-color:currentColor } }
+            @keyframes moveGrid {
+                from { background-position: 0 0; }
+                to   { background-position: 0 60px; }
+            }
 
-  /* Line 1: type, blink a few times, then turn cursor off */
-  .line1{
-    animation:
-      typing    2s   steps(30,end) forwards,
-      blink     0.8s step-end       2s 3,         /* 3 blinks = 2.4s of blinking */
-      cursorOff 0.01s linear        4.1s forwards;/* turn off just before line2 starts */
-  }
+            .intro {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                animation: collapse 1s ease forwards;
+                animation-delay: 10s
+            }
 
-  /* Line 2: start soon after line 1; blink some, then turn off */
-  .line2{
-    border-right-color:transparent;               /* hide caret until start */
-    animation:
-      typing    2.4s steps(30,end)   4.2s forwards,  /* begins 0.1s after line1 off */
-      cursorOn  0.01s linear         4.2s forwards,  /* show caret at start */
-      blink     0.8s step-end        6.6s 6,         /* 6 blinks after typing */
-      cursorOff 0.01s linear        11.4s forwards;  /* 6.6 + (6×0.8) */
-  }
-</style>
-</head>
-<body>
-  <div class="wrap">
-    <span class="typewriter line1 neon-pink">Hello, I'm Timandra.</span><br>
-    <span class="typewriter line2 neon-orange">I'm a full stack developer.</span>
-  </div>
-</body>
+            .wrap{ 
+                text-align:center;
+                animation: fadeOut 2s ease forwards;
+                animation-delay: 8s;
+            }
+
+            /* neon looks */
+            .neon-pink{ color:#ff2a6d; text-shadow:0 0 10px #ff2a6d, 0 0 20px #ff2a6d; }
+            .neon-orange{ color:#ff6b35; text-shadow:0 0 8px #ff6b35, 0 0 18px #ff6b35, 0 0 32px #ff6b35; }
+
+            /* typewriter base — cursor follows text color */
+            .typewriter{
+                display:inline-block;
+                white-space:nowrap; overflow:hidden; width:0;
+                border-right:3px solid currentColor; /* caret uses the element's color */
+            }
+
+            /* sizes + target widths (adjust ch if text clips) */
+            .line1{ font-size:3.2rem; --tw: 22ch; }
+            .line2{ font-size:1.6rem; --tw: 28ch; margin-top:.7rem; }
+
+            /* keyframes */
+            @keyframes typing {
+                from { width: 0; opacity: 1; }
+                to   { width: var(--tw); opacity: 1; }
+            }
+            @keyframes blink    { 50%{ border-right-color:transparent } }
+            @keyframes cursorOff{ to  { border-right-color:transparent } }
+            @keyframes cursorOn { to  { border-right-color:currentColor } }
+
+            /* Line 1: type, blink a few times, then turn cursor off */
+            .line1 {
+                animation:
+                typing    2s   steps(30,end) forwards,
+                blink     0.8s step-end       2s 3,          /* 3 blinks = 2.4s of blinking */
+                cursorOff 0.01s linear        4.1s forwards; /* turn off just before line2 starts */
+            }
+
+            /* Line 2: start soon after line 1; blink some, then turn off */
+            .line2 {
+                border-right-color:transparent;
+                animation:
+                    typing    2.4s steps(30,end)   4.2s forwards,
+                    cursorOn  0.01s linear         4.2s forwards,
+                    blink     0.8s step-end        6.6s 6,
+                    cursorOff 0.01s linear        11.4s forwards;
+            }
+
+            .line3 {
+                --tw: 26ch;
+                border-right-color: transparent;
+                opacity: 0;
+                display: inline-block;
+                width: var(--tw);
+                white-space: nowrap;
+                overflow: hidden;
+                animation:
+                    typing 2.4s steps(30, end) 11s forwards,
+                    cursorOn 0.01s linear 11s forwards,
+                    blink 0.8s step-end 15.4s 6,
+                    cursorOff 0.01s linear 20.2s forwards,
+                    fadeOut 2s ease 18s forwards;
+            }
+
+            .top-banner {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 0; left: 0; width: 100%;
+                padding: 1rem;
+                text-align: center;
+                font-size: 1.5rem;
+                background: transparent;
+                border-bottom: 2px solid #ff2a6d;
+                text-shadow: 0 0 10px #ff2a6d, 0 0 20px #ff2a6d;
+                color: #ff2a6d;
+                opacity: 0;
+                animation: fadeIn 2s ease forwards;
+                animation-delay: 8s;
+            }
+
+            @keyframes fadeIn {
+                to { opacity: 1; }
+            }
+
+            @keyframes fadeOut {
+                to { opacity: 0; }
+            }
+
+            @keyframes collapse {
+                to { min-height: 0; height: 0; overflow: hidden; }
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <!-- Introduction code -->
+        <div class="intro">
+            <div class="wrap">
+                <span class="typewriter line1 neon-pink">Hello, I'm Timandra.</span><br>
+                <span class="typewriter line2 neon-orange">I'm a full stack developer.</span>
+            </div>
+        </div>
+
+        <!-- Fade-in header -->
+        <header class="top-banner neon-pink">Timandra Draper | My Portfolio</header>
+
+        <div class="after-header">
+            <span class="typewriter line3 neon-orange">Feel free to click around! </span>
+        </div>
+    </body>
 </html>
